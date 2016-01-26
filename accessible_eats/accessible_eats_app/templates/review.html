@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Review
+{% endblock %}
+
+{% block content %}
+<div class = "row">
+	<div class = "col-md-10 col-md-offset-1">
+		<h1 class="text-center">Review Restaurant</h1>
+		<p class="text-center">Review a restaurant's accessibility, including whether or not wheelchairs are able to access the restaurant and the restrooms, whether the restrooms are wheelchair accesible and anything else you can think of.</p>
+		<form action="/review/" method="POST">
+			<div class="form-group">
+		        <label for="inputName">Name</label>
+		        <input type="text" class="form-control" id="name" placeholder="Name">
+		    </div>
+		    <div class="form-group">
+		        <label for="inputEmail">Email</label>
+		        <input type="text" class="form-control" id="email" placeholder="Email">
+		    </div>
+		    <div class="form-group">
+		        <label for="restaurantName">Restaurant</label>
+		        <input type="text" class="form-control" id="restaurantName" placeholder="Restaurant">
+		    </div>
+		    <div class = "form-group">
+			    <label>Is this restaurant accessible?</label>
+				<label class="radio-inline">
+			        <input name="aeBool" value="yes" type="radio">Yes
+			    </label>
+			    <label class="radio-inline">
+			        <input name="aeBool" value="yes" checked="" type="radio">No
+			    </label>
+			</div>
+		    <div class="form-group">
+		        <label for="inputPassword">Additional Comments</label>
+		        <textarea class="form-control" id="commentsText" rows="10"></textarea>
+		    </div>
+		    <button type="submit" class="btn btn-primary">Login</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
