@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class = "row">
+{% if verified_apps %}
+	{% for app in verified_apps %}
+		{% include "templates/app_inline_template.html" %}
+	{% endfor %}
+{% else %}
+<h3 class="text-center">No outstanding applications.</h3>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function processApplication(app_id, accept) {
+	$.ajax({url: "/reviewapplications/" + app_id + "/" + accept + "/", success: function(result){
+        $("#verifiedreview" + result).hide()
+    }});
+}
+</script>
+
+
+{% endblock %}

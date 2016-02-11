@@ -1,6 +1,7 @@
 Django==1.8.6
 django-common==0.1.51
 httplib2==0.9
+numpy==1.10.4
 oauth==1.0
 oauthlib==1.0.3
 requests==2.9.1

@@ -1,0 +1,3 @@
+{% if review.comments %}
+	<div id="review{{review.id}}" class = "reviewComment limitHeight"><i onclick="expand({{review.id}})" class="fa fa-expand commentExpand"></i>{{review.comments}}</div>
+{% endif %}

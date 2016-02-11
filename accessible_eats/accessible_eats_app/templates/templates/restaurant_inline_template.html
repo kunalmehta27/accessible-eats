@@ -1,0 +1,42 @@
+{% load staticfiles %}
+
+<div id="verifiedreview{{restaurant.id}}" class="panel panel-default">
+  <div class="panel-body">
+    <div class = "row">
+      <div style="display:inline-block; float:left; height: 60px; padding-left:15px;">
+        <h4>{{restaurant.name}}</h4>
+        <h6>{{restaurant.address_oneline}}, {{restaurant.display_phone}}</h6>
+      </div>
+      <div style="display:inline-block; float:right; height: 60px; padding-right:15px; padding-top:10px; width:40%; text-align:right;">
+        <p class="{{restaurant.accessible_rating_color}}"><i style="margin-right:5px" class="fa fa-wheelchair"></i><span style="font-size:1.2em">{{restaurant.accessible_rating}}</span>/{{restaurant.max_rating}} <span style="color:#222222">({{restaurant.review_count}})</span></p>
+        <p id="showmore{{restaurant.id}}" style="margin: 0px; padding: 0px; margin-top: -10px; cursor: pointer;"><a onclick="showMore({{restaurant.id}})">See more &darr;</a></p>
+        <p id="showless{{restaurant.id}}" style="display: none; margin: 0px; padding: 0px; margin-top: -10px; cursor: pointer;"><a onclick="showLess({{restaurant.id}})">See less &uarr;</a></p>
+      </div>
+    </div>
+    <hr style="margin-top: 10px; margin-bottom: 10px">
+    <div style="float: left; width:85%;">
+      <p><strong>Categories</strong>: {{restaurant.categories_list}}</p>
+      {% for a_data in restaurant.accessibility_data %}
+        <div class="col-md-4">
+          <p class="text-center">{{a_data.short_text}}  <span class="{{a_data.text_class}}" style="font-size:1.2em"><i style="margin-right:5px" class="fa {{a_data.icon}}"></i></span></p>
+        </div>
+      {% endfor %}
+    </div>
+    <div style="float:right; margin-right:15px">
+      <a target="_blank" href="{{restaurant.url}}"><img style="height: 10px;" src="{{restaurant.rating_img}}"></a>
+      <div style="margin-top:-10px">
+        <a target="_blank" href="{{restaurant.url}}"><img style="height: 15px;" src="{% static 'img/yelp_logo_large.png' %}"></a>
+      </div>
+      <p style="font-size:10px"><a target="_blank" href='{{restaurant.url}}'>See Yelp Page&rarr;</a></p>
+    </div>
+    <div class="extended" style="display: none; clear:both" id="extended{{restaurant.id}}">
+      <hr style="margin-top: 10px; margin-bottom: 10px">
+      <!-- {% if restaurant.has_review_text %}
+        <strong>Accessibility Reviews</strong>
+        {% for review in restaurant.reviews.all %}
+          {% include 'templates/review_comment.html' with review=review %}
+        {% endfor %}
+      {% endif %} -->
+    </div>
+  </div>
+</div>

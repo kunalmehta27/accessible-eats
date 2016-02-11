@@ -5,39 +5,100 @@
 Review
 {% endblock %}
 
+{% block extra_js %}
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'js/review_form.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
+{% endblock %}
+
+
 {% block content %}
 <div class = "row">
 	<div class = "col-md-10 col-md-offset-1">
-		<h1 class="text-center">Review Restaurant</h1>
-		<p class="text-center">Review a restaurant's accessibility, including whether or not wheelchairs are able to access the restaurant and the restrooms, whether the restrooms are wheelchair accesible and anything else you can think of.</p>
-		<form action="/review/" method="POST">
-			<div class="form-group">
-		        <label for="inputName">Name</label>
-		        <input type="text" class="form-control" id="name" placeholder="Name">
-		    </div>
-		    <div class="form-group">
-		        <label for="inputEmail">Email</label>
-		        <input type="text" class="form-control" id="email" placeholder="Email">
-		    </div>
-		    <div class="form-group">
-		        <label for="restaurantName">Restaurant</label>
-		        <input type="text" class="form-control" id="restaurantName" placeholder="Restaurant">
-		    </div>
-		    <div class = "form-group">
-			    <label>Is this restaurant accessible?</label>
-				<label class="radio-inline">
-			        <input name="aeBool" value="yes" type="radio">Yes
-			    </label>
-			    <label class="radio-inline">
-			        <input name="aeBool" value="yes" checked="" type="radio">No
-			    </label>
+		<h1 class="text-center">Review Restaurant's Accessibility</h1>
+		{% if form.errors %}
+			<h4 class="text-center text-danger">Submission has errors. Please see below.</h4>
+		{% endif %}
+		<form action="/review/" method="post">
+		    {% csrf_token %}
+		    
+		    <div class="form-page" id ="page1">
+			    <div class = "form-group">
+			    	<div class="text-danger">{{form.restaurant.errors.as_text}}</div>
+			    	{{form.restaurant.label_tag}}
+			    	{{form.restaurant}}
+			    </div>
+			    <div id = "google-map" style="width:100%; height:370px; margin-top: 20px;">
+
+
+			    </div>
 			</div>
-		    <div class="form-group">
-		        <label for="inputPassword">Additional Comments</label>
-		        <textarea class="form-control" id="commentsText" rows="10"></textarea>
-		    </div>
-		    <button type="submit" class="btn btn-primary">Login</button>
+		    
+			<div class="form-page" id = "page2">
+			    <h4 class="text-center">Please check boxes if restaurant has the following features.</h4>
+			    <table class="table table-striped">
+			    	<tr class="checkbox-header-row">
+			    		<th class="question">Question</th>
+			    		<th class="checkbox checkbox-header">Yes?</th>
+			    	</tr>
+			    	<tr class="form-row">
+					    <div class = "form-group form-checkbox">
+					    	<td class="question">
+						    	<div class="text-danger">{{form.has_accessible_bathroom.errors.as_text}}</div>
+						    	{{form.has_accessible_bathroom.help_text}}
+					    	</td>
+					    	<td class="checkbox">
+					    		{{form.has_accessible_bathroom}}
+					    	</td>
+					    </div>
+			    	</tr>
+			    	<tr class="form-row">
+					    <div class = "form-group form-checkbox">
+					    	<td class="question">
+						    	<div class="text-danger">{{form.has_elevator.errors.as_text}}</div>
+						    	{{form.has_elevator.help_text}}
+					    	</td>
+					    	<td class="checkbox">
+					    		{{form.has_elevator}}
+					    	</td>
+					    </div>
+			    	</tr>
+			    	<tr class="form-row">
+					    <div class = "form-group form-checkbox">
+					    	<td class="question">
+						    	<div class="text-danger">{{form.has_parking.errors.as_text}}</div>
+						    	{{form.has_parking.help_text}}
+					    	</td>
+					    	<td class="checkbox">
+					    		{{form.has_parking}}
+					    	</td>
+					    </div>
+			    	</tr>
+			    </table>
+			</div>
+		    
+		    <div class="form-page" id ="page3">
+			    <div class = "form-group">
+			    	<div class="text-danger">{{form.comments.errors.as_text}}</div>
+			    	{{form.comments.label_tag}}
+			    	{{form.comments}}
+			    </div>
+			    <div class = "form-group">
+					<div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+						<button class="btn btn-success btn-lg btn-block" type="submit">Submit Review</button>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
+</div>
+<div class = "row" style="margin-bottom:50px">
+  <div id="bill-pager" class="pager-footer">
+    <ul class="pager">
+        <li class="previous pager-footer-button" id="previous-page"><a class="pager-button">&larr; Previous</a></li>
+        <span class="pager-footer-item displaying italics pager-button">Step <span id="page-num">1</span> of <span id="num-pages">3</span></span>
+        <li class="next pager-footer-button" id="next-page"><a class="pager-button">Next &rarr;</a></li>
+    </ul>
+  </div>
 </div>
 {% endblock %}

@@ -1,3 +1,179 @@
-#commentsText {
+textarea {
 	resize: none;
+}
+
+.rating-label {
+	font-size: 15px;
+	line-height: 1.4;
+}
+
+/* Bootstrap overrides */
+.pager a {
+    color: #fff!important;
+}
+
+.pager .disabled > a, .pager .disabled > a:hover, .pager .disabled > a:focus, .pager .disabled > span {
+    color: #854ea4!important;
+}
+
+.pager {
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.pager-footer-item, .pager-footer-item:hover {
+  height:34px;
+  background-color: #008cba;
+  color:white;
+  border-radius:15px;
+  display:inline-block;
+  padding:8px 14px;
+}
+
+.pager-footer-button {
+	height: 50px!important;
+	/*font-size: 16px!important;*/
+	padding: 12px!important;
+}
+
+.pager-footer {
+	margin-top:-10px;
+}
+
+.pager-button {
+	background: #008cba !important;
+	height: 34px !important;
+	color: white !important; 
+	border-radius:15px !important;
+	line-height: 21px !important;
+	cursor: pointer;
+}
+
+.reviewComment {
+	border: 2px solid #eee;
+	border-radius: 10px;
+	padding: 10px;
+	padding-right: 40px;
+}
+
+.commentExpand {
+	position: relative;
+	top: 0px;
+	right: -30px;
+	float: right;
+	color: #022241;
+	cursor: pointer;
+}
+
+.limitHeight {
+	height: 40px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.extended {
+	font-size: 12px;
+}
+
+.checkbox input {
+	position: relative !important;
+	margin-top: 0px !important;
+	margin-left: 0px !important;
+}
+
+.question {
+	width: 95%;
+	font-size: 15px;
+}
+
+.slider {
+	width: 60% !important;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+.slider-selection {
+	background: #43ac6a !important;
+}
+
+.checkbox {
+	width: 5%;
+}
+
+table {
+	width: 100%;
+}
+
+th, td {
+	vertical-align: middle !important;
+	border-top: none !important;
+}
+
+.checkbox-header {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.checkbox-header-row {
+	border-bottom: 2px solid #eee;
+}
+
+.form-group label {
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.form-page {
+	height: 500px;
+}
+
+.filter-inputs {
+	width: 100%;
+}
+
+.clear-input {
+	position: absolute;
+	top: 12px;
+	right: 10px;
+	z-index: 2000;
+	cursor: pointer;
+}
+
+.select2-dropdown {
+	z-index: 4000;
+}
+
+.select2-container .select2-choice {
+	height: 50px;
+}
+
+.select2-container {
+	width: 100% !important;
+}
+
+#select2-filter-yelp-container {
+	line-height: 35px;
+}
+
+#select2-filter-ae-container {
+	line-height: 35px;
+}
+
+.select2-selection, .select2-selection__arrow {
+	height: 35px !important;
+}
+
+.nav-stacked>li>a {
+	cursor: pointer;
+	color: black;
+}
+
+#search-toggle {
+	cursor: pointer;
 }

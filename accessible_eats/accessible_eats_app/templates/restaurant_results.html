@@ -1,0 +1,9 @@
+<span class="hidden" id="results_num_pages">{{num_pages}}</span>
+<span class="hidden" id="results_page_num">{{page_num}}</span>
+{% if restaurants %}
+	{% for restaurant in restaurants %}
+		{% include "templates/restaurant_inline_template.html" %}
+	{% endfor %}
+{% else %}
+<h3 class="text-center">No matching restaurants found.</h3>
+{% endif %}

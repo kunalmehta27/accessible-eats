@@ -1,8 +1,105 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block title %}
+Search
+{% endblock %}
+
+{% block extra_css %}
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
+<link href="{% static 'css/typeaheadjs.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-<div class="starter-template">
-	<h1>Bootstrap starter template</h1>
-</div>
+<div id="restaurants-vals" class="hidden">{{restaurants}}</div>
+<div id="categories-vals" class="hidden">{{categories}}</div>
+<div id="filter-fields" class="hidden">{{json_fields}}</div>
+<div class = "row">
+
+	<div class="col-md-3">
+
+		<h4 class='text-center visible-sm visible-md visible-lg'>Search for restaurants</h4>
+		<div id="search-inputs" class = "hidden-xs">
+			<div class="input-group filter-inputs">
+			  <input id="filter-name" type="text" class="form-control" placeholder="By name...">
+			  <i style="color:#808080" class="fa fa-times-circle clear-name clear-input"></i>
+			</div>
+			<div style="margin-top:10px"></div>
+			<div class="input-group filter-inputs">
+			  <input id="filter-category" type="text" class="form-control" placeholder="By category...">
+			  <i style="color:#808080" class="fa fa-times-circle clear-category clear-input"></i>
+			</div>
+			<div style="margin-top:10px"></div>
+			<div class="input-group filter-inputs">
+			  <input id="filter-geography" type="text" class="form-control" placeholder="By city...">
+			  <i style="color:#808080" class="fa fa-times-circle clear-geography clear-input"></i>
+			</div>
+		</div>
+		<div style="margin-top:10px"></div>
+		<div class = "visible-md visible-lg">
+			<select class="input-group filter-inputs" id="filter-yelp">
+				<option value=''></option>
+				{% for star in stars %}
+					<option value="{{star.0}}">{{star.1}} ({{star.2|safe}})</option>
+				{% endfor %}
+			</select>
+			<div style="margin-top:10px"></div>
+			<select class="input-group filter-inputs" id="filter-ae">
+				<option value=''></option>
+				{% for rating in ratings %}
+					<option value="{{rating}}">{{rating}}/{{max_rating}}</option>
+				{% endfor %}
+			</select>
+			<div style="margin-top:40px"></div>
+			<h5 class='text-center'>Filter by feature</h5>
+			<hr style="margin-top: 10px; margin-bottom: 10px">
+			<ul class="nav nav-pills nav-stacked">
+				{% for key, val in fields.items %}
+	  			<li ><a id="{{key}}">{{val}}</a></li>
+	  			{% endfor %}
+			</ul>
+		</div>
+		
+		<!--<button style="margin-top:30px" class="btn btn-success btn-block" id="search-button">Seach</button>-->
+	</div>
+	<div class="col-md-9">
+		<div class="visible-xs">
+			<h4 class='text-center' style="margin-top: -10px">Search for restaurants</h4>
+			<div class="input-group" style="width: 100%">
+		      <div class="input-group-btn">
+		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="search-by">Search by</span><span class="caret"></span></button>
+		        <ul class="dropdown-menu">
+		          <li><a href="#">Name</a></li>
+		          <li><a href="#">Category</a></li>
+		          <li><a href="#">Location</a></li>
+		        </ul>
+		      </div><!-- /btn-group -->
+		      <input type="text" class="form-control" aria-label="...">
+		      <div class="input-group-btn">
+		        <button class="btn btn-default" type="button">Go!</button>
+		      </div>
+		    </div><!-- /input-group -->
+		<div style="margin-bottom: 20px"></div>
+		</div>
+
+		<div id = "results"></div>
+		<div class="row">
+			<h6 class="text-center"><i class="fa fa-wheelchair"> refers to percentage of reviews that indicate restaurant is accessible</i></h6>
+		</div>
+		<div>
+          <div id="bill-pager" class="pager-footer">
+            <ul class="pager">
+                <li class="previous pager-footer-button" id="previous-page"><a class="pager-button">&larr; Previous</a></li>
+                <span class="pager-footer-item displaying italics pager-button">Page <span id="page-num">1</span> of <span id="num-pages">1</span></span>
+                <li class="next pager-footer-button" id="next-page"><a class="pager-button">Next &rarr;</a></li>
+            </ul>
+          </div>
+        </div>
+	</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+<script src="{% static 'js/typeahead.bundle.min.js' %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
 {% endblock %}
