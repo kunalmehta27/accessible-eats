@@ -31,9 +31,11 @@ Search
 			</div>
 			<div style="margin-top:10px"></div>
 			<div class="input-group filter-inputs">
-			  <input id="filter-geography" type="text" class="form-control" placeholder="By city...">
+			  <input id="filter-geography" type="text" class="form-control" placeholder="By city..." onfocus="geolocate()">
 			  <i style="color:#808080" class="fa fa-times-circle clear-geography clear-input"></i>
 			</div>
+			<span id="geo-lat" class="hidden"></span>
+			<span id="geo-lng" class="hidden"></span>
 		</div>
 		<div style="margin-top:10px"></div>
 		<div class = "visible-md visible-lg">
@@ -63,29 +65,28 @@ Search
 		<!--<button style="margin-top:30px" class="btn btn-success btn-block" id="search-button">Seach</button>-->
 	</div>
 	<div class="col-md-9">
-		<div class="visible-xs">
+		<div id="mini-searchbar" class="visible-xs">
 			<h4 class='text-center' style="margin-top: -10px">Search for restaurants</h4>
 			<div class="input-group" style="width: 100%">
 		      <div class="input-group-btn">
-		        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="search-by">Search by</span><span class="caret"></span></button>
-		        <ul class="dropdown-menu">
-		          <li><a href="#">Name</a></li>
-		          <li><a href="#">Category</a></li>
-		          <li><a href="#">Location</a></li>
+		        <button id="small-search-type" style="width:100px" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="search-by" style="width:100px;">Search by</span><span class="caret"></span></button>
+		        <ul id="search-by-menu" class="dropdown-menu">
+		          <li><a>Name</a></li>
+		          <li><a>Location</a></li>
 		        </ul>
 		      </div><!-- /btn-group -->
-		      <input type="text" class="form-control" aria-label="...">
+		      <input id="small-search-val" type="text" class="form-control" aria-label="...">
 		      <div class="input-group-btn">
-		        <button class="btn btn-default" type="button">Go!</button>
+		        <button id="small-search" class="btn btn-primary" type="button">Go!</button>
+		      </div>
+		      <div class="input-group-btn">
+		        <button id="small-clear" class="btn btn-warning" type="button">Clear</button>
 		      </div>
 		    </div><!-- /input-group -->
 		<div style="margin-bottom: 20px"></div>
 		</div>
 
 		<div id = "results"></div>
-		<div class="row">
-			<h6 class="text-center"><i class="fa fa-wheelchair"> refers to percentage of reviews that indicate restaurant is accessible</i></h6>
-		</div>
 		<div>
           <div id="bill-pager" class="pager-footer">
             <ul class="pager">
@@ -102,4 +103,5 @@ Search
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 <script src="{% static 'js/typeahead.bundle.min.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}

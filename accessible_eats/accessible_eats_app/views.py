@@ -1,11 +1,48 @@
 from django.shortcuts import render, HttpResponse
-from .helpers import text_to_object
+from .helpers import text_to_object, text_to_coordinate
 from .models import *
 from django.db import IntegrityError
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core.paginator import Paginator
 import json, urllib
 import numpy as np
+import math
+
+class BoundingBox(object):
+    def __init__(self, *args, **kwargs):
+        self.lat_min = None
+        self.lon_min = None
+        self.lat_max = None
+        self.lon_max = None
+
+
+def get_bounding_box(latitude_in_degrees, longitude_in_degrees, half_side_in_miles):
+    assert half_side_in_miles > 0
+    assert latitude_in_degrees >= -180.0 and latitude_in_degrees  <= 180.0
+    assert longitude_in_degrees >= -180.0 and longitude_in_degrees <= 180.0
+
+    lat = math.radians(latitude_in_degrees)
+    lon = math.radians(longitude_in_degrees)
+
+    radius  = 6371.0
+    # Radius of the parallel at given latitude
+    parallel_radius = radius*math.cos(lat)
+
+    lat_min = lat - half_side_in_miles/radius
+    lat_max = lat + half_side_in_miles/radius
+    lon_min = lon - half_side_in_miles/parallel_radius
+    lon_max = lon + half_side_in_miles/parallel_radius
+    rad2deg = math.degrees
+
+    box = BoundingBox()
+    box.lat_min = rad2deg(lat_min)
+    box.lon_min = rad2deg(lon_min)
+    box.lat_max = rad2deg(lat_max)
+    box.lon_max = rad2deg(lon_max)
+
+
+    return (box)
+
 
 def create_stars(num):
     if np.ceil(num) - num == 0.5:
@@ -69,7 +106,7 @@ def search(request):
     return render(request, "search.html", {'restaurants':restaurants, 'categories':categories, 'stars':stars, 'ratings':ratings, 'max_rating':max_rating, 'fields':fields, 'json_fields':json_fields})
 
 
-def searchresults(request, page_num, name, category, yelp_rating, ae_rating, filter_vals):
+def searchresults(request, page_num, name, category, yelp_rating, ae_rating, filter_vals, lat, lng, location_name):
     restaurants = Restaurant.objects.all()
 
     filter_vals = json.loads(urllib.unquote(filter_vals))
@@ -95,6 +132,17 @@ def searchresults(request, page_num, name, category, yelp_rating, ae_rating, fil
         ae_rating = int(ae_rating)
         restaurants = [a for a in restaurants if a.accessible_rating() >= ae_rating]
         restaurants = Restaurant.objects.filter(id__in = [a.id for a in restaurants])
+
+    if lat != '0' and lng != '0':
+        box = get_bounding_box(float(lat), float(lng), 50)
+        restaurants = Restaurant.objects.filter(latitude__lte = box.lat_max, latitude__gte = box.lat_min, longitude__lte = box.lon_max, longitude__gte = box.lon_min)
+
+    if location_name != '0':
+        location_name = urllib.unquote(location_name)
+        lat, lng = text_to_coordinate(location_name)
+        box = get_bounding_box(lat, lng, 50)
+        restaurants = Restaurant.objects.filter(latitude__lte = box.lat_max, latitude__gte = box.lat_min, longitude__lte = box.lon_max, longitude__gte = box.lon_min)
+
 
     num_per_page = 3
     paginator = Paginator(restaurants, num_per_page)

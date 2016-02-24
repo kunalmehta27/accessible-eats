@@ -1,40 +1,120 @@
+var placeSearch, autocomplete;
+
+function initAutocomplete() {
+	console.log('initAutocomplete')
+  	autocomplete = new google.maps.places.Autocomplete(
+      	(document.getElementById('filter-geography')),
+      	{types: ['geocode']});
+  	autocomplete.addListener('place_changed', setCoordinates);
+}
+
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+
+function setCoordinates() {
+  var place = autocomplete.getPlace();
+  var lat = place.geometry.location.lat()
+  var lng = place.geometry.location.lng()
+  $("#geo-lat").html(lat)
+  $("#geo-lng").html(lng)
+  reload_data()
+}
+
+
 function reload_data() {
 	page_num = $("#page-num").html()
-	name = $("#filter-name").typeahead('val')
-	category = $("#filter-category").typeahead('val')
-	yelp_rating = $("#filter-yelp").val()
-	ae_rating = $("#filter-ae").val()
-
-	for(field in filter_values) {
-		if($("#" + field).parent().hasClass('active')) {
-			filter_values[field] = true
-		}
-		else {
+	if($("#mini-searchbar").height() > 0) {
+		lat = 0
+		lng = 0
+		category = 0
+		for(field in filter_values) {
 			filter_values[field] = false
 		}
-	}
-
-	filter_string = encodeURIComponent(JSON.stringify(filter_values))
-
-	if(name == '') {
-		name = 0
-	}
-	name = encodeURIComponent(name)
-
-	if(category == '') {
-		category = 0
-	}
-	category = encodeURIComponent(category)
-
-	if(yelp_rating == '') {
+		filter_string = encodeURIComponent(JSON.stringify(filter_values))
+		if($(".search-by").html() == 'Name') {
+			name = $("#small-search-val").val()
+			name = encodeURIComponent(name)
+		}
+		else {
+			name = ''
+		}
+		if(name == '') {
+			name = 0
+		}
+		if($(".search-by").html() == 'Location') {
+			location_name = $("#small-search-val").val()
+			location_name = encodeURIComponent(location_name)
+		}
+		else {
+			location_name = ''
+		}
+		if(location_name == '') {
+			location_name = 0
+		}
 		yelp_rating = 0
-	}
-
-	if(ae_rating == '') {
 		ae_rating = 0
 	}
+	else {
+		name = $("#filter-name").typeahead('val')
+		category = $("#filter-category").typeahead('val')
+		yelp_rating = $("#filter-yelp").val()
+		ae_rating = $("#filter-ae").val()
+		lat = $("#geo-lat").html()
+		lng = $("#geo-lng").html()
+		if(lat == '') {
+			lat = 0
+		}
+		if(lng == '') {
+			lng = 0
+		}
 
-	url = "/searchresults/" + page_num + '/' + name + '/' + category + '/' + yelp_rating + '/' + ae_rating + '/' + filter_string
+		for(field in filter_values) {
+			if($("#" + field).parent().hasClass('active')) {
+				filter_values[field] = true
+			}
+			else {
+				filter_values[field] = false
+			}
+		}
+
+		filter_string = encodeURIComponent(JSON.stringify(filter_values))
+
+		if(name == '') {
+			name = 0
+		}
+		name = encodeURIComponent(name)
+
+		if(category == '') {
+			category = 0
+		}
+		category = encodeURIComponent(category)
+
+		if(yelp_rating == '') {
+			yelp_rating = 0
+		}
+
+		if(ae_rating == '') {
+			ae_rating = 0
+		}
+
+		location_name = 0
+	}
+
+	console.log(location_name)
+	url = "/searchresults/" + page_num + '/' + name + '/' + category + '/' + yelp_rating + '/' + ae_rating + '/' + filter_string + '/' + lat + '/' + lng + '/' + location_name + '/'
 	$("#results").load(url, function() {
 		$("#page-num").html($("#results_page_num").html())
 		$("#num-pages").html($("#results_num_pages").html())
@@ -179,7 +259,23 @@ $(".nav-stacked>li>a").click(function() {
 
 $(".clear-geography").click(function() {
 	$("#filter-geography").val('')
+	$("#geo-lat").html('')
+	$("#geo-lng").html('')
 	reload_data()
+})
+
+$("#small-search").click(function() {
+	reload_data()
+})
+
+$("#small-clear").click(function() {
+	$("#small-search-val").val('')
+	reload_data()
+})
+
+$("#search-by-menu li a").click(function() {
+	val = $(this).html()
+	$(".search-by").html(val)
 })
 
 reload_data()

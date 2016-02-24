@@ -8,7 +8,6 @@ class Constants:
     review_score_values = {'has_accessible_bathroom':4, 'has_elevator':3, 'has_parking':3}
     max_score = sum(review_score_values.values())
     review_boolean_fields = ['has_elevator', 'has_accessible_bathroom', 'has_parking']
-    short_text = {'has_accessible_bathroom':'Accessible Bathrooms?', 'has_elevator':'Elevator?', 'has_parking':'Parking?'}
     filter_fields = {'has_accessible_bathroom':'Accessible Bathrooms', 'has_elevator':'Elevator', 'has_parking':'Parking'}
 
 class Category(models.Model):
@@ -69,16 +68,14 @@ class Restaurant(models.Model):
     def accessibility_data(self):
         accessibility_data = []
         for field in Constants.review_boolean_fields:
-            accessibility_dict = {}
-            accessibility_dict['short_text'] = Constants.short_text[field]
             if self.aggregate_rating(field):
-                accessibility_dict['icon'] = 'fa-check-circle'
-                accessibility_dict['text_class'] = 'text-success'
-            else:
-                accessibility_dict['icon'] = 'fa-times-circle'
-                accessibility_dict['text_class'] = 'text-danger'
-            accessibility_data.append(accessibility_dict)
-        return accessibility_data
+                accessibility_data.append(Constants.filter_fields[field])
+        if len(accessibility_data) == 0:
+            return "None"
+        elif len(accessibility_data) == 1:
+            return accessibility_data[0]
+        else:
+            return ", ".join(accessibility_data)
 
     def address(self):
         return self.display_address + '<br>' + self.city + ', ' + self.state + ' ' + self.zip_code

@@ -7,11 +7,21 @@ import json
 GOOGLE_API_KEY = 'AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50'
 yelp_api = YelpAPI('US2mtMpskJ36JSb_n6Uy-w', 'gtu09XfGR3FwC_Ar7LLYGEB-3EM', 'fIvJ3B48nF_Ro6QP5C-m6ptJOQHB5p7u', '8lApWweZlez8vmlBYQ5mNMW3pWI')
 
+def text_to_coordinate(name):
+    name = urllib.quote(name)
+    url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=%s&key=%s' % (name, GOOGLE_API_KEY)
+    page = urllib2.urlopen(url)
+    data = page.read()
+    obj = json.loads(data)
+    obj = obj['results'][0]['geometry']['location']
+    lat = float(obj['lat'])
+    lng = float(obj['lng'])
+    return lat, lng
+
 
 def parse_google_places(name):
     name = urllib.quote(name)
     url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=%s&key=%s' % (name, GOOGLE_API_KEY)
-    print url
     page = urllib2.urlopen(url)
     data = page.read()
     obj = json.loads(data)
