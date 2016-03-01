@@ -12,6 +12,14 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import socket
+
+development_environs = ['Kunals-MacBook-Pro.local']
+
+if socket.gethostname() in development_environs:
+    production = False
+else:
+    production = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,9 +31,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = ')s9e9!xztnd^*vcps0b7*3mt1gjs-tt4qor5oyn4k^#xn7vi7='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if production:
+    DEBUG = False
+    TEMPLATE_DEBUG = False
+    ADMINS = (
+        ('Kunal Mehta', 'accessible.eats@gmail.com'),
+    )
+    SERVER_EMAIL = 'accessible.eats@gmail.com'
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ae-dev2.us-west-2.elasticbeanstalk.com',
+    'www.accessible-eats.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -75,12 +96,24 @@ WSGI_APPLICATION = 'accessible_eats.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Internationalization
@@ -96,8 +129,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'email-smtp.us-west-2.amazonaws.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'AKIAIZ2HGRDUZH62SELA'
+EMAIL_HOST_PASSWORD = 'AmLPVUiDm5i2315/5GnsYimNxFQJg/wTYs4TYUtzl0oh'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+if not production:
+    CURRENT_HOST = 'http://127.0.0.1:8000/'
+else:
+    CURRENT_HOST = 'http://www.accessible-eats.com/'

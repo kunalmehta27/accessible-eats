@@ -25,7 +25,10 @@ def parse_google_places(name):
     page = urllib2.urlopen(url)
     data = page.read()
     obj = json.loads(data)
-    name = obj['results'][0]['name']
+    try:
+        name = obj['results'][0]['name']
+    except IndexError:
+        return None, None
     address = obj['results'][0]['formatted_address']
     return name, address
 
@@ -45,8 +48,13 @@ def parse_yelp_obj(yelp_obj, db_obj):
 
 def text_to_object(text):
     name, address = parse_google_places(text)
-    search_results = yelp_api.search_query(term=name, location=address)
+    print name
+    print address
+    if name == None:
+        return None
+    search_results = yelp_api.search_query(term=name, location=address, sort=1)
     yelp_restaurant_object = search_results['businesses'][0]
+    print yelp_restaurant_object
     yelp_id = yelp_restaurant_object['id']
     if Restaurant.objects.filter(yelp_id=yelp_id).exists():
         restaurant_object = Restaurant.objects.get(yelp_id=yelp_id)

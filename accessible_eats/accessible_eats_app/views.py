@@ -7,6 +7,10 @@ from django.core.paginator import Paginator
 import json, urllib
 import numpy as np
 import math
+from django.views.decorators.csrf import csrf_exempt
+from pyshorteners import Shortener
+from django.core.mail import mail_admins
+
 
 class BoundingBox(object):
     def __init__(self, *args, **kwargs):
@@ -40,7 +44,6 @@ def get_bounding_box(latitude_in_degrees, longitude_in_degrees, half_side_in_mil
     box.lat_max = rad2deg(lat_max)
     box.lon_max = rad2deg(lon_max)
 
-
     return (box)
 
 
@@ -55,6 +58,7 @@ def create_stars(num):
     if half_star:
         stars += '&frac12;'
     return stars
+
 
 def index(request):
     return render(request, "index.html", {})
@@ -72,7 +76,6 @@ def review(request):
     else:
         form = ReviewForm()
         return render(request, "review.html", {'form':form})
-
 
 
 def search(request):
@@ -108,6 +111,8 @@ def search(request):
 
 def searchresults(request, page_num, name, category, yelp_rating, ae_rating, filter_vals, lat, lng, location_name):
     restaurants = Restaurant.objects.all()
+    restaurants = [a for a in restaurants if a.review_count() != '0 reviews']
+    restaurants = Restaurant.objects.filter(id__in = [a.id for a in restaurants])
 
     filter_vals = json.loads(urllib.unquote(filter_vals))
 
@@ -148,4 +153,48 @@ def searchresults(request, page_num, name, category, yelp_rating, ae_rating, fil
     paginator = Paginator(restaurants, num_per_page)
     restaurants = paginator.page(page_num)
     return render(request, "restaurant_results.html", {'restaurants': restaurants, 'page_num': page_num, 'num_pages': paginator.num_pages})
+
+
+def survey_only(request, restaurant_id):
+    if request.POST:
+        form = SurveyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "thanks.html", {})
+        else:
+            restaurant = Restaurant.objects.get(id=restaurant_id)
+            return render(request, "review.html", {'form':form, 'restaurant_id':restaurant_id, 'restaurant':restaurant})
+    else:
+        form = SurveyForm(initial={'restaurant':restaurant_id})
+        restaurant = Restaurant.objects.get(id=restaurant_id)
+        return render(request, 'survey_only.html', {'form':form, 'restaurant_id':restaurant_id, 'restaurant':restaurant})
+
+
+@csrf_exempt
+def text(request):
+    error_msg = 'Sorry, we had a problem parsing your request. Please try again.'
+    msg = request.POST.get('Body', '')
+    restaurant_obj = text_to_object(msg)
+    if restaurant_obj is None:
+        response = error_msg
+    else:
+        url = 'http://' + request.META['HTTP_HOST'] + '/survey/' + str(restaurant_obj.id) + '/'
+        response = "Thanks for using Accessible Eats. Fill out your survey for " + restaurant_obj.name + " at " + url + ". If this is not the restaurant you were looking for, please text us again with the restaurant name and general location."
+    if msg.strip() == '' or restaurant_obj == None:
+        twiml = '<Response><Message>' + error_msg + '</Message></Response>'
+    else:
+        twiml = '<Response><Message>' + response + '</Message></Response>'
+    return HttpResponse(twiml, content_type='text/xml')
+
+
+def resources(request):
+    return render(request, "resources.html", {})
+
+
+def custom_404(request):
+    return render_to_response('404.html')
+
+
+def custom_500(request):
+    return render_to_response('500.html')
 

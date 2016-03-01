@@ -5,10 +5,10 @@ import json
 from collections import Counter
 
 class Constants:
-    review_score_values = {'has_accessible_bathroom':4, 'has_elevator':3, 'has_parking':3}
+    review_score_values = {'has_accessible_bathroom':3, 'has_parking':2, 'has_space':1, 'has_ramp':2, 'has_entrances':2}
     max_score = sum(review_score_values.values())
-    review_boolean_fields = ['has_elevator', 'has_accessible_bathroom', 'has_parking']
-    filter_fields = {'has_accessible_bathroom':'Accessible Bathrooms', 'has_elevator':'Elevator', 'has_parking':'Parking'}
+    review_boolean_fields = ['has_accessible_bathroom', 'has_parking', 'has_space', 'has_ramp', 'has_entrances']
+    filter_fields = {'has_accessible_bathroom':'Accessible Bathrooms', 'has_parking':'Parking', 'has_ramp':'Ramps', 'has_entrances':'Wide Entrances', 'has_space':'Floor Space'}
 
 class Category(models.Model):
     name = models.CharField(max_length=255, help_text="Name of Category")
@@ -90,7 +90,7 @@ class Restaurant(models.Model):
         return string
 
     def accessible_rating_color(self):
-        if self.accessible_rating() >= 5:
+        if self.accessible_rating() >= 7:
             return 'text-success'
         else:
             return 'text-danger'
@@ -111,9 +111,11 @@ class Restaurant(models.Model):
 
 
 class Review(models.Model):
-    has_accessible_bathroom = models.BooleanField(blank=True, help_text="1. Does the location have accessible bathrooms for both sexes?")
-    has_elevator = models.BooleanField(blank=True, help_text="2. Does the restaurant have elevator access to all parts of the restaurant?")
-    has_parking = models.BooleanField(blank=True, help_text="3. Does the restaurant have designated accessible parking?")
+    has_accessible_bathroom = models.BooleanField(blank=True, help_text="1. Does the location have accessible bathrooms for both sexes, with handrails and enough room for wheelchairs?")
+    has_parking = models.BooleanField(blank=True, help_text="2. Does the restaurant have designated accessible parking?")
+    has_entrances = models.BooleanField(blank=True, help_text="3. Does the restaurant have wide enough entrances (approx. 32in) to the restaurant and bathrooms?")
+    has_ramp = models.BooleanField(blank=True, help_text="4. Is there a ramp, walkway or other device that leads to the restaurant from the parking lot?")
+    has_space = models.BooleanField(blank=True, help_text="5. Is there enough space for wheelchairs to navigate and utilize all the tables and the floor of the restaurant?")
     restaurant = models.ForeignKey(Restaurant, related_name="reviews", help_text="Foreign key to restaurant")
     comments = models.TextField(null=True, blank=True, help_text="Additional optional comments")
 
@@ -144,5 +146,17 @@ class ReviewForm(ModelForm):
                 del self._errors['restaurant']
                 self.add_error('restaurant', error)
             return self.cleaned_data
+
+class SurveyForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = '__all__'
+        widgets = {
+            'comments': Textarea(attrs={'class':'form-control', 'placeholder':'Please provide any additional information you wish here.'})
+        }
+
+
+class ReviewedTweet(models.Model):
+    tweet_id = models.CharField(max_length=255)
 
 

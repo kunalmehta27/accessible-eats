@@ -27,7 +27,7 @@
       {% if restaurant.has_review_text %}
         <strong>Accessibility Reviews</strong>
         {% for review in restaurant.reviews.all %}
-          {% include 'templates/review_comment.html' with review=review %}
+          {% include 'inlines/review_comment.html' with review=review %}
         {% endfor %}
       {% endif %}
     </div> -->

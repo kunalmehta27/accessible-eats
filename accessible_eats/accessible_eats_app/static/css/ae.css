@@ -28,7 +28,7 @@ textarea {
 
 .pager-footer-item, .pager-footer-item:hover {
   height:34px;
-  background-color: #008cba;
+  background-color: #149c82;
   color:white;
   border-radius:15px;
   display:inline-block;
@@ -46,7 +46,7 @@ textarea {
 }
 
 .pager-button {
-	background: #008cba !important;
+	background: #149c82 !important;
 	height: 34px !important;
 	color: white !important; 
 	border-radius:15px !important;
@@ -176,4 +176,50 @@ th, td {
 
 #search-toggle {
 	cursor: pointer;
+}
+@media (max-width: 767px) {
+	.ae-index-btn {
+		display: inline-block !important;
+	}
+}
+
+.fa-rotate-45 {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.fa-rotate-315 {
+    -webkit-transform: rotate(315deg);
+    -moz-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    transform: rotate(315deg);
+}
+
+.step-row {
+	border-bottom: 2px solid black; 
+	padding-bottom:15px; 
+	padding-top:15px
+}
+
+.footer {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	padding: 20px;
+	margin-top: 20px;
+	background: #2c3e50;
+	color: white;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }

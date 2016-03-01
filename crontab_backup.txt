@@ -1,0 +1,1 @@
+*/2 * * * * source /tmp/ae_app/bin/activate && python Desktop/accessible-eats/accessible_eats/manage.py twitter_cron
