@@ -223,3 +223,23 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
+.step-img {
+	float: left;
+	width: 90px;
+	text-align: center;
+	vertical-align: middle;
+	height: 100%;
+}
+
+.step-img i {
+	line-height: 100%;
+}
+
+.step-text {
+	margin-left:90px;
+}
+
+.step-info {
+	height: 100%;
+}
