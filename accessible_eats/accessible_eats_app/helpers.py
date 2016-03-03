@@ -52,7 +52,7 @@ def text_to_object(text):
     print address
     if name == None:
         return None
-    search_results = yelp_api.search_query(term=name, location=address, sort=1)
+    search_results = yelp_api.search_query(term=name, location=address, sort=0)
     yelp_restaurant_object = search_results['businesses'][0]
     print yelp_restaurant_object
     yelp_id = yelp_restaurant_object['id']
