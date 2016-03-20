@@ -28,22 +28,44 @@
 	    	<tr class="form-row">
 			    <div class = "form-group form-checkbox">
 			    	<td class="question">
-				    	<div class="text-danger">{{form.has_elevator.errors.as_text}}</div>
-				    	{{form.has_elevator.help_text}}
+				    	<div class="text-danger">{{form.has_parking.errors.as_text}}</div>
+				    	{{form.has_parking.help_text}}
 			    	</td>
 			    	<td class="checkbox">
-			    		{{form.has_elevator}}
+			    		{{form.has_parking}}
 			    	</td>
 			    </div>
 	    	</tr>
 	    	<tr class="form-row">
 			    <div class = "form-group form-checkbox">
 			    	<td class="question">
-				    	<div class="text-danger">{{form.has_parking.errors.as_text}}</div>
-				    	{{form.has_parking.help_text}}
+				    	<div class="text-danger">{{form.has_entrances.errors.as_text}}</div>
+				    	{{form.has_entrances.help_text}}
 			    	</td>
 			    	<td class="checkbox">
-			    		{{form.has_parking}}
+			    		{{form.has_entrances}}
+			    	</td>
+			    </div>
+	    	</tr>
+	    	<tr class="form-row">
+			    <div class = "form-group form-checkbox">
+			    	<td class="question">
+				    	<div class="text-danger">{{form.has_ramp.errors.as_text}}</div>
+				    	{{form.has_ramp.help_text}}
+			    	</td>
+			    	<td class="checkbox">
+			    		{{form.has_ramp}}
+			    	</td>
+			    </div>
+	    	</tr>
+	    	<tr class="form-row">
+			    <div class = "form-group form-checkbox">
+			    	<td class="question">
+				    	<div class="text-danger">{{form.has_space.errors.as_text}}</div>
+				    	{{form.has_space.help_text}}
+			    	</td>
+			    	<td class="checkbox">
+			    		{{form.has_space}}
 			    	</td>
 			    </div>
 	    	</tr>
