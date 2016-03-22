@@ -1,0 +1,1 @@
+*/2 * * * * source /opt/python/run/venv/bin/activate && python manage.py twitter_cron

@@ -10,6 +10,7 @@ import math
 from django.views.decorators.csrf import csrf_exempt
 from pyshorteners import Shortener
 from django.core.mail import mail_admins
+from django.core.management import call_command
 
 
 class BoundingBox(object):
@@ -197,4 +198,9 @@ def custom_404(request):
 
 def custom_500(request):
     return render_to_response('500.html')
+
+def twittercron(request):
+    call_command('twitter_cron')
+    return HttpResponse("Success")
+    
 

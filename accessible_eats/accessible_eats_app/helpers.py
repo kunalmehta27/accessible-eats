@@ -48,13 +48,10 @@ def parse_yelp_obj(yelp_obj, db_obj):
 
 def text_to_object(text):
     name, address = parse_google_places(text)
-    print name
-    print address
     if name == None:
         return None
     search_results = yelp_api.search_query(term=name, location=address, sort=0)
     yelp_restaurant_object = search_results['businesses'][0]
-    print yelp_restaurant_object
     yelp_id = yelp_restaurant_object['id']
     if Restaurant.objects.filter(yelp_id=yelp_id).exists():
         restaurant_object = Restaurant.objects.get(yelp_id=yelp_id)
