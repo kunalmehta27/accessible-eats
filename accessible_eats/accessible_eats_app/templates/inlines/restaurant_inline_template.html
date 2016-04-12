@@ -22,6 +22,9 @@
     <hr style="margin-top: 10px; margin-bottom: 10px">
     <p><strong>Categories</strong>: {{restaurant.categories_list}}</p>
     <p><strong>Features</strong>: {{restaurant.accessibility_data}}</p>
+    {% if restaurant.not_accessibility_data != 'None' %}
+    <p><strong>Doesn't have</strong>: {{restaurant.not_accessibility_data}}</p>
+    {% endif %}
     <!-- <div class="extended" style="display: none; clear:both" id="extended{{restaurant.id}}">
       <hr style="margin-top: 10px; margin-bottom: 10px">
       {% if restaurant.has_review_text %}

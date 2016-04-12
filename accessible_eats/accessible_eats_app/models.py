@@ -77,6 +77,18 @@ class Restaurant(models.Model):
         else:
             return ", ".join(accessibility_data)
 
+    def not_accessibility_data(self):
+        accessibility_data = []
+        for field in Constants.review_boolean_fields:
+            if not self.aggregate_rating(field):
+                accessibility_data.append(Constants.filter_fields[field])
+        if len(accessibility_data) == 0:
+            return "None"
+        elif len(accessibility_data) == 1:
+            return accessibility_data[0]
+        else:
+            return ", ".join(accessibility_data)
+
     def address(self):
         return self.display_address + '<br>' + self.city + ', ' + self.state + ' ' + self.zip_code
 
@@ -112,8 +124,8 @@ class Restaurant(models.Model):
 
 class Review(models.Model):
     has_accessible_bathroom = models.BooleanField(blank=True, help_text="1. Does the location have accessible bathrooms for both sexes, with handrails and enough room for wheelchairs?")
-    has_parking = models.BooleanField(blank=True, help_text="2. Does the restaurant have designated accessible parking?")
-    has_entrances = models.BooleanField(blank=True, help_text="3. Does the restaurant have wide enough entrances (approx. 32in) to the restaurant and bathrooms?")
+    has_parking = models.BooleanField(blank=True, help_text="2. Does the restaurant have designated van accessible parking?")
+    has_entrances = models.BooleanField(blank=True, help_text="3. Does the restaurant have wide enough entrances (approx. 32in) to the restaurant and bathrooms that are easy to open?")
     has_ramp = models.BooleanField(blank=True, help_text="4. Is there a ramp, walkway or other device that leads to the restaurant from the parking lot?")
     has_space = models.BooleanField(blank=True, help_text="5. Is there enough space for wheelchairs to navigate and utilize all the tables and the floor of the restaurant?")
     restaurant = models.ForeignKey(Restaurant, related_name="reviews", help_text="Foreign key to restaurant")

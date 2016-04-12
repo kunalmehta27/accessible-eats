@@ -177,7 +177,15 @@ $(".clear-name").click(function() {
 	reload_data()
 })
 
+restaurants_decoded = []
+
 var restaurants = JSON.parse($("#restaurants-vals").html())
+restaurants.forEach(function(d) {
+	d = d.replace(/&amp;/g, '&');
+	restaurants_decoded.push(d)
+})
+
+restaurants = restaurants_decoded;
 
 var restaurants = new Bloodhound({
 	datumTokenizer: Bloodhound.tokenizers.whitespace,

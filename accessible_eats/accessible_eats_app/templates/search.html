@@ -11,7 +11,7 @@ Search
 {% endblock %}
 
 {% block content %}
-<div id="restaurants-vals" class="hidden">{{restaurants}}</div>
+<div id="restaurants-vals" class="hidden">{{restaurants|safe}}</div>
 <div id="categories-vals" class="hidden">{{categories}}</div>
 <div id="filter-fields" class="hidden">{{json_fields}}</div>
 <div class = "row">

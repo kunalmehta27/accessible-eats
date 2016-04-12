@@ -4,16 +4,124 @@
 		"selected_items":
 		[
 			[
-				"display",
-				"display_phone"
+				"of",
+				"offensiveline"
 			],
 			[
-				"res",
-				"restaurant_object"
+				"punter",
+				"punter_stats"
 			],
 			[
-				"yel",
-				"yelp_restaurant_object"
+				"ki",
+				"kicker_stats"
+			],
+			[
+				"def",
+				"defensiveback_stats"
+			],
+			[
+				"lin",
+				"linebacker_stats"
+			],
+			[
+				"offe",
+				"offensiveline_stats"
+			],
+			[
+				"qu",
+				"quarterback_stats"
+			],
+			[
+				"final_",
+				"final_value_arr"
+			],
+			[
+				"final",
+				"final_value_arr"
+			],
+			[
+				"bool",
+				"bool_filter_weights"
+			],
+			[
+				"bool_filter",
+				"bool_filter_output"
+			],
+			[
+				"strateg",
+				"strategy_raw_outputs"
+			],
+			[
+				"ana",
+				"analyze_portfolio_weights"
+			],
+			[
+				"filte",
+				"filtered_example_"
+			],
+			[
+				"filter",
+				"filtered_example_"
+			],
+			[
+				"fi",
+				"filtered_optimal"
+			],
+			[
+				"filtere",
+				"filtered_assets"
+			],
+			[
+				"if",
+				"ifmain	if __name__ == '__main__'"
+			],
+			[
+				"format",
+				"formatted_array"
+			],
+			[
+				"with",
+				"with_fico_csv_title"
+			],
+			[
+				"filtered",
+				"filtered_csv_title"
+			],
+			[
+				"additional",
+				"additional_modelset_titles"
+			],
+			[
+				"linear",
+				"linear_regression_fico"
+			],
+			[
+				"decision",
+				"decision_tree_fico"
+			],
+			[
+				"log",
+				"logistic_regression"
+			],
+			[
+				"add",
+				"additional_modelset"
+			],
+			[
+				"multi",
+				"multiprocess_chunks"
+			],
+			[
+				"mths_since",
+				"mths_since_last_major_derog"
+			],
+			[
+				"mt",
+				"mths_since_last_delinq"
+			],
+			[
+				"last_",
+				"last_fico_range_low"
 			],
 			[
 				"repl",
@@ -186,10 +294,6 @@
 			[
 				"left",
 				"leftover_big_lines_p2"
-			],
-			[
-				"add",
-				"additionalHandler"
 			],
 			[
 				"A",
@@ -410,152 +514,16 @@
 			[
 				"Netwo",
 				"NetworkWeightCondition"
-			],
-			[
-				"person_",
-				"person_most_frequently_cosponsors"
-			],
-			[
-				"most",
-				"most_frequently_cosponsors_person"
-			],
-			[
-				"Memb",
-				"MemberProfileData"
-			],
-			[
-				"sp",
-				"sponsored_bills_percent_left_committee"
-			],
-			[
-				"spons",
-				"sponsored_bills_percent_enacted"
-			],
-			[
-				"avg",
-				"avg_cosponsors_per_sponsored_bill"
-			],
-			[
-				"sponsored_",
-				"sponsored_bills_percent_left_committee"
-			],
-			[
-				"sponsored",
-				"sponsored_bills_percent_enacted"
-			],
-			[
-				"role",
-				"role_type"
-			],
-			[
-				"mo",
-				"most_recent_role"
-			],
-			[
-				"member",
-				"member_roles"
-			],
-			[
-				"co",
-				"committee"
-			],
-			[
-				"comm",
-				"committeerole"
-			],
-			[
-				"Mul",
-				"MultipleObjectsReturned"
-			],
-			[
-				"leader",
-				"leadership_title"
-			],
-			[
-				"parse_committe",
-				"parse_committee_members"
-			],
-			[
-				"respon",
-				"responsibilities_array"
-			],
-			[
-				"COmm",
-				"CommitteeCaucus"
-			],
-			[
-				"Staff",
-				"StafferType"
-			],
-			[
-				"b",
-				"blog_page"
-			],
-			[
-				"topic__",
-				"topic__supertopic__id"
-			],
-			[
-				"Object",
-				"ObjectDoesNotExist"
-			],
-			[
-				"list",
-				"list-style-type"
-			],
-			[
-				"Compl",
-				"ComplaintTopicForm"
-			],
-			[
-				"HttpRespon",
-				"HttpResponseRedirect"
-			],
-			[
-				"HttpR",
-				"HttpResponseRedirect"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "accessible_eats/accessible_eats_app/templates/review.html",
-			"settings":
-			{
-				"buffer_size": 1666,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "accessible_eats/accessible_eats_app/static/css/ae.css",
-			"settings":
-			{
-				"buffer_size": 32,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "accessible_eats/accessible_eats_app/templates/base.html",
-			"settings":
-			{
-				"buffer_size": 1754,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "accessible_eats/accessible_eats_app/views.py",
-			"settings":
-			{
-				"buffer_size": 415,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 27.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -588,17 +556,23 @@
 	},
 	"file_history":
 	[
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/templates/base.html",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/views.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/urls.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/templates/search.html",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/models.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/templates/index.html",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/types.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/management/commands/twitter_cron.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/helpers.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/results_csvs.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/optimal_allocation.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/optimal_strategies.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/csv_to_latex.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/investment_helpers.py",
+		"/Users/kunalmehta/Desktop/Thesis/csv_to_latex.py",
+		"/Users/kunalmehta/Desktop/Thesis/results_csvs.py",
+		"/Users/kunalmehta/Desktop/Thesis/analyze_data.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/analyze_data.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/additional_analysis.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/with_cscore_analysis.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/format_R_csvs.py",
+		"/Users/kunalmehta/Desktop/Thesis/python/collect_data.py",
 		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats/urls.py",
-		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/utils.py",
+		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/templates/index.html",
+		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/templates/base.html",
+		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats_app/urls.py",
 		"/Users/kunalmehta/Desktop/accessible-eats/accessible_eats/accessible_eats/settings.py",
 		"/Users/kunalmehta/Desktop/Thesis v2/python/collect_data.py",
 		"/Users/kunalmehta/Desktop/ByeLine/byeline_site/byeline/templates/index.html",
@@ -693,6 +667,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"variables",
+			"with_fico_titles",
+			"row",
+			"write_csv",
+			"var_replace",
+			"mths",
+			"var_replace",
+			"clf.sco",
+			"logistic_regression'",
+			"print",
+			"loan_status",
+			"write_csv",
+			"accuracy",
+			"vset_title",
+			"return_row_ix",
+			"col_ix",
 			"get_member_data",
 			"html",
 			"return_actual",
@@ -804,23 +794,7 @@
 			"=\"",
 			"get_image",
 			"Releases",
-			"parse(",
-			"primary_image",
-			"previous_day_hidden",
-			"'topic':",
-			"not-allowed",
-			">\n",
-			"username",
-			"clearBtn",
-			".datepicker({",
-			"../IvyMinded/",
-			"’",
-			"world",
-			"text",
-			"’",
-			"Error",
-			"time.",
-			".load"
+			"parse("
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -838,115 +812,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "accessible_eats/accessible_eats_app/templates/review.html",
-					"settings":
-					{
-						"buffer_size": 1666,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1025,
-								1025
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 46.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "accessible_eats/accessible_eats_app/static/css/ae.css",
-					"settings":
-					{
-						"buffer_size": 32,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								29,
-								29
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "accessible_eats/accessible_eats_app/templates/base.html",
-					"settings":
-					{
-						"buffer_size": 1754,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								483,
-								483
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "accessible_eats/accessible_eats_app/views.py",
-					"settings":
-					{
-						"buffer_size": 415,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								242,
-								242
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -996,40 +863,72 @@
 		"selected_items":
 		[
 			[
-				"vie",
-				"accessible_eats_app/views.py"
+				"inline",
+				"accessible_eats_app/templates/inlines/restaurant_inline_template.html"
+			],
+			[
+				"mo",
+				"accessible_eats_app/models.py"
+			],
+			[
+				"csv",
+				"csv_to_latex.py"
+			],
+			[
+				"hel",
+				"investment_helpers.py"
+			],
+			[
+				"res",
+				"results_csvs.py"
+			],
+			[
+				"resul",
+				"results_csvs.py"
+			],
+			[
+				"help",
+				"investment_helpers.py"
+			],
+			[
+				"inv",
+				"investment_helpers.py"
+			],
+			[
+				"opti",
+				"optimal_allocation.py"
+			],
+			[
+				"anal",
+				"analyze_data.py"
+			],
+			[
+				"an",
+				"analyze_data.py"
+			],
+			[
+				"results",
+				"results_csvs.py"
+			],
+			[
+				"addi",
+				"additional_analysis.py"
+			],
+			[
+				"",
+				"with_cscore_analysis.py"
 			],
 			[
 				"base",
 				"accessible_eats_app/templates/base.html"
 			],
 			[
+				"urls",
+				"accessible_eats/urls.py"
+			],
+			[
 				"view",
 				"accessible_eats_app/views.py"
-			],
-			[
-				"urls",
-				"accessible_eats_app/urls.py"
-			],
-			[
-				"index",
-				"accessible_eats_app/templates/index.html"
-			],
-			[
-				"twit",
-				"accessible_eats_app/management/commands/twitter_cron.py"
-			],
-			[
-				"tw",
-				"accessible_eats_app/management/commands/twitter_cron.py"
-			],
-			[
-				"vi",
-				"accessible_eats_app/views.py"
-			],
-			[
-				"p",
-				"accessible_eats_app/helpers.py"
 			],
 			[
 				"url",
@@ -1046,6 +945,10 @@
 			[
 				"in",
 				"byeline/templates/index.html"
+			],
+			[
+				"vi",
+				"byeline/views.py"
 			],
 			[
 				"thank",
