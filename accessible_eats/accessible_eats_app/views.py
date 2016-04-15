@@ -149,7 +149,7 @@ def searchresults(request, page_num, name, category, yelp_rating, ae_rating, fil
         box = get_bounding_box(lat, lng, 50)
         restaurants = Restaurant.objects.filter(latitude__lte = box.lat_max, latitude__gte = box.lat_min, longitude__lte = box.lon_max, longitude__gte = box.lon_min)
 
-
+    restaurants = restaurants.order_by('name')
     num_per_page = 3
     paginator = Paginator(restaurants, num_per_page)
     restaurants = paginator.page(page_num)

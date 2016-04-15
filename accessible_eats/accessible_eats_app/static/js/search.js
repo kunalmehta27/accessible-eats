@@ -1,3 +1,30 @@
+var opts = {
+  lines: 13 // The number of lines to draw
+, length: 28 // The length of each line
+, width: 14 // The line thickness
+, radius: 42 // The radius of the inner circle
+, scale: 1 // Scales overall size of the spinner
+, corners: 1 // Corner roundness (0..1)
+, color: '#000' // #rgb or #rrggbb or array of colors
+, opacity: 0.25 // Opacity of the lines
+, rotate: 0 // The rotation offset
+, direction: 1 // 1: clockwise, -1: counterclockwise
+, speed: 1 // Rounds per second
+, trail: 60 // Afterglow percentage
+, fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+, zIndex: 2e9 // The z-index (defaults to 2000000000)
+, className: 'spinner' // The CSS class to assign to the spinner
+, top: '50%' // Top position relative to parent
+, left: '50%' // Left position relative to parent
+, shadow: false // Whether to render a shadow
+, hwaccel: false // Whether to use hardware acceleration
+, position: 'absolute' // Element positioning
+}
+var target = document.getElementById('background-spinner')
+var spinner = new Spinner(opts).spin(target);
+$("#background-spinner").hide()
+
+
 var placeSearch, autocomplete;
 
 function initAutocomplete() {
@@ -113,12 +140,14 @@ function reload_data() {
 		location_name = 0
 	}
 
-	console.log(location_name)
-	url = "/searchresults/" + page_num + '/' + name + '/' + category + '/' + yelp_rating + '/' + ae_rating + '/' + filter_string + '/' + lat + '/' + lng + '/' + location_name + '/'
-	$("#results").load(url, function() {
-		$("#page-num").html($("#results_page_num").html())
-		$("#num-pages").html($("#results_num_pages").html())
-	})
+	$("#background-spinner").fadeIn( function() {
+		url = "/searchresults/" + page_num + '/' + name + '/' + category + '/' + yelp_rating + '/' + ae_rating + '/' + filter_string + '/' + lat + '/' + lng + '/' + location_name + '/'
+		$("#results").load(url, function() {
+			$("#page-num").html($("#results_page_num").html())
+			$("#num-pages").html($("#results_num_pages").html())
+		})
+		$("#background-spinner").fadeOut()
+	});
 }
 
 filter_values = {}
@@ -169,10 +198,12 @@ function expand(review_id) {
 }
 
 $("#search-button").click(function() {
+	$("#page-num").html(1)
 	reload_data()
 })
 
 $(".clear-name").click(function() {
+	$("#page-num").html(1)
 	$("#filter-name").typeahead('val', '')
 	reload_data()
 })
@@ -204,10 +235,12 @@ $("#filter-name").typeahead({
 })
 
 $("#filter-name").bind('typeahead:select', function(ev, suggestion) {
+	$("#page-num").html(1)
 	reload_data()
 })
 
 $(".clear-category").click(function() {
+	$("#page-num").html(1)
 	$("#filter-category").typeahead('val', '')
 	reload_data()
 })
@@ -231,6 +264,7 @@ $("#filter-category").typeahead({
 })
 
 $("#filter-category").bind('typeahead:select', function(ev, suggestion) {
+	$("#page-num").html(1)
 	reload_data()
 })
 
@@ -241,6 +275,7 @@ $("#filter-yelp").select2({
 })
 
 $("#filter-yelp").on("change", function(e) {
+	$("#page-num").html(1)
 	reload_data()
 })
 
@@ -251,6 +286,7 @@ $("#filter-ae").select2({
 })
 
 $("#filter-ae").on("change", function(e) {
+	$("#page-num").html(1)
 	reload_data()
 })
 
@@ -262,10 +298,12 @@ $(".nav-stacked>li>a").click(function() {
 	else {
 		li.addClass('active')
 	}
+	$("#page-num").html(1)
 	reload_data()
 })
 
 $(".clear-geography").click(function() {
+	$("#page-num").html(1)
 	$("#filter-geography").val('')
 	$("#geo-lat").html('')
 	$("#geo-lng").html('')
@@ -273,10 +311,12 @@ $(".clear-geography").click(function() {
 })
 
 $("#small-search").click(function() {
+	$("#page-num").html(1)
 	reload_data()
 })
 
 $("#small-clear").click(function() {
+	$("#page-num").html(1)
 	$("#small-search-val").val('')
 	reload_data()
 })
