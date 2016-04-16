@@ -57,6 +57,7 @@ function setCoordinates() {
   var lng = place.geometry.location.lng()
   $("#geo-lat").html(lat)
   $("#geo-lng").html(lng)
+  $("#page-num").html(1)
   reload_data()
 }
 
@@ -145,8 +146,9 @@ function reload_data() {
 		$("#results").load(url, function() {
 			$("#page-num").html($("#results_page_num").html())
 			$("#num-pages").html($("#results_num_pages").html())
+			$("#background-spinner").fadeOut()
 		})
-		$("#background-spinner").fadeOut()
+		
 	});
 }
 
