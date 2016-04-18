@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from pyshorteners import Shortener
 from django.core.mail import mail_admins
 from django.core.management import call_command
+from django.conf import settings
 
 
 class BoundingBox(object):
@@ -67,16 +68,16 @@ def index(request):
 
 def review(request):
     if request.POST:
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return render(request, "thanks.html", {})
         else:
-            return render(request, "review.html", {'form':form})
+            return render(request, "review.html", {'form':form, 'google_api_key':settings.GOOGLE_API_KEY})
         
     else:
         form = ReviewForm()
-        return render(request, "review.html", {'form':form})
+        return render(request, "review.html", {'form':form, 'google_api_key':settings.GOOGLE_API_KEY})
 
 
 def search(request):
@@ -107,7 +108,7 @@ def search(request):
     fields = Constants.filter_fields
     json_fields = json.dumps(fields)
 
-    return render(request, "search.html", {'restaurants':restaurants, 'categories':categories, 'stars':stars, 'ratings':ratings, 'max_rating':max_rating, 'fields':fields, 'json_fields':json_fields})
+    return render(request, "search.html", {'restaurants':restaurants, 'categories':categories, 'stars':stars, 'ratings':ratings, 'max_rating':max_rating, 'fields':fields, 'json_fields':json_fields, 'google_api_key':settings.GOOGLE_API_KEY})
 
 
 def searchresults(request, page_num, name, category, yelp_rating, ae_rating, filter_vals, lat, lng, location_name):
@@ -158,7 +159,7 @@ def searchresults(request, page_num, name, category, yelp_rating, ae_rating, fil
 
 def survey_only(request, restaurant_id):
     if request.POST:
-        form = SurveyForm(request.POST)
+        form = SurveyForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return render(request, "thanks.html", {})
@@ -169,6 +170,11 @@ def survey_only(request, restaurant_id):
         form = SurveyForm(initial={'restaurant':restaurant_id})
         restaurant = Restaurant.objects.get(id=restaurant_id)
         return render(request, 'survey_only.html', {'form':form, 'restaurant_id':restaurant_id, 'restaurant':restaurant})
+
+
+def detailed(request, restaurant_id):
+    restaurant = Restaurant.objects.get(id=restaurant_id)
+    return render(request, 'detailed.html', {'restaurant':restaurant})
 
 
 @csrf_exempt

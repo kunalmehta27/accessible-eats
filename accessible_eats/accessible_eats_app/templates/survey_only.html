@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
+{% block title %}
+{{restaurant.name}}
+{% endblock %}
+
 {% block content %}
 <div class="row" id = "survey-only">
 	<h3 class="text-center">{{restaurant.name}}</h3>
 	<h5 class="text-center">{{restaurant.address_oneline}}</h5>
 	<h5 class="text-center">{{restaurant.display_phone}}</h5>
 	<hr>
-	<form action="/survey/{{restaurant_id}}/" method="post">{% csrf_token %}
+	<form enctype="multipart/form-data" action="/survey/{{restaurant_id}}/" method="post">{% csrf_token %}
 	    <h4 class="text-center">Please check boxes if restaurant has the following features.</h4>
 	    <div class="hidden">{{form.restaurant}}</div>
 	    <table class="table table-striped">
@@ -71,6 +75,16 @@
 	    	</tr>
 	    </table>
 	    <div class = "form-group">
+	    	<div class = "form-group">
+			    <div class="text-danger">{{form.image1.errors.as_text}}</div>
+			    	<strong>{{form.image1.help_text}}</strong>
+			    	{{form.image1}}
+			</div>
+			<div class="form-group">
+			    <div class="text-danger">{{form.image2.errors.as_text}}</div>
+		    	<strong>{{form.image2.help_text}}</strong>
+		    	{{form.image2}}
+			</div>
 	    	<div class="text-danger">{{form.comments.errors.as_text}}</div>
 	    	{{form.comments.label_tag}}
 	    	{{form.comments}}

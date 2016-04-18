@@ -2,10 +2,11 @@ from accessible_eats_app.models import *
 from yelpapi import YelpAPI
 import urllib, urllib2
 import json
+from django.conf import settings
 
 
-GOOGLE_API_KEY = 'AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50'
-yelp_api = YelpAPI('US2mtMpskJ36JSb_n6Uy-w', 'gtu09XfGR3FwC_Ar7LLYGEB-3EM', 'fIvJ3B48nF_Ro6QP5C-m6ptJOQHB5p7u', '8lApWweZlez8vmlBYQ5mNMW3pWI')
+GOOGLE_API_KEY = settings.GOOGLE_API_KEY
+yelp_api = YelpAPI(settings.YELP_CONSUMER_KEY, settings.YELP_CONSUMER_SECRET, settings.YELP_TOKEN, settings.YELP_TOKEN_SECRET)
 
 def text_to_coordinate(name):
     name = urllib.quote(name)

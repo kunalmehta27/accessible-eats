@@ -121,6 +121,21 @@ class Restaurant(models.Model):
         else:
             return False
 
+    def image_list(self):
+        reviews_image1 = self.reviews.exclude(image1=None).exclude(image1='')
+        reviews_image2 = self.reviews.exclude(image2=None).exclude(image2='')
+        lst = [a.image1.url for a in reviews_image1]
+        lst2 = [a.image2.url for a in reviews_image2]
+        images = lst + lst2
+        images = list(set(images))
+        return images
+
+    def comment_list(self):
+        comments = self.reviews.exclude(comments=None).exclude(comments='').values_list('comments', flat=True)
+        print comments
+        return comments
+
+
 
 class Review(models.Model):
     has_accessible_bathroom = models.BooleanField(blank=True, help_text="1. Does the location have accessible bathrooms for both sexes, with handrails and enough room for wheelchairs?")
@@ -129,6 +144,8 @@ class Review(models.Model):
     has_ramp = models.BooleanField(blank=True, help_text="4. Is there a ramp, walkway or other device that leads to the restaurant from the parking lot?")
     has_space = models.BooleanField(blank=True, help_text="5. Is there enough space for wheelchairs to navigate and utilize all the tables and the floor of the restaurant?")
     restaurant = models.ForeignKey(Restaurant, related_name="reviews", help_text="Foreign key to restaurant")
+    image1 = models.FileField(upload_to='', blank=True, null=True, help_text="(Optional) Upload image of accessibile features:")
+    image2 = models.FileField(upload_to='', blank=True, null=True, help_text="(Optional) Upload additional image:")
     comments = models.TextField(null=True, blank=True, help_text="Additional optional comments")
 
 

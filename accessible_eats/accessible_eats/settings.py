@@ -58,7 +58,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accessible_eats_app'
+    'accessible_eats_app',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -142,7 +143,30 @@ EMAIL_HOST_PASSWORD = 'AmLPVUiDm5i2315/5GnsYimNxFQJg/wTYs4TYUtzl0oh'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+
+if not production:
+    MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'accessible_eats_app', 'media')
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    AWS_S3_SECURE_URLS = False
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_ACCESS_KEY_ID = 'AKIAI5IZRA6FUUBN4KRA'
+    AWS_S3_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'accessible-eats-media'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
 if not production:
     CURRENT_HOST = 'http://127.0.0.1:8000/'
 else:
     CURRENT_HOST = 'http://www.accessible-eats.com/'
+
+GOOGLE_API_KEY = 'AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50'
+
+YELP_CONSUMER_KEY = 'US2mtMpskJ36JSb_n6Uy-w'
+YELP_CONSUMER_SECRET = 'gtu09XfGR3FwC_Ar7LLYGEB-3EM'
+YELP_TOKEN = 'fIvJ3B48nF_Ro6QP5C-m6ptJOQHB5p7u'
+YELP_TOKEN_SECRET = '8lApWweZlez8vmlBYQ5mNMW3pWI'
+

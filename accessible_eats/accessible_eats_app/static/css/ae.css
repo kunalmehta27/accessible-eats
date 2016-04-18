@@ -77,10 +77,6 @@ textarea {
 	text-overflow: ellipsis;
 }
 
-.extended {
-	font-size: 12px;
-}
-
 .checkbox input {
 	position: relative !important;
 	margin-top: 0px !important;

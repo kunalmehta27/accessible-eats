@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{restaurant.name}}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<h3 class="text-center">{{restaurant.name}}</h3>
+	<h5 class="text-center">{{restaurant.address_oneline}}</h5>
+	<h5 class="text-center">{{restaurant.display_phone}}</h5>
+</div>
+
+<hr style="margin-top: 10px; margin-bottom: 10px">
+<ul class="nav nav-tabs">
+    {% if restaurant.comment_list %}
+        <li class="active"><a data-toggle="tab" href="#{{restaurant.id}}-extended-comments">Comments</a></li>
+    {% endif %}
+
+    {% if restaurant.image_list %}
+        {% if restaurant.comment_list %}
+        <li><a data-toggle="tab" href="#{{restaurant.id}}-extended-images">Images</a></li>
+        {% else %}
+        <li class="active"><a data-toggle="tab" href="#{{restaurant.id}}-extended-images">Images</a></li>
+        {% endif %}
+    {% endif %}
+</ul>
+<div class="tab-content">
+    <div id="{{restaurant.id}}-extended-comments" class="tab-pane fade in active">
+        <div style="width: 90%; margin: 0 auto;">
+            <table class="table table-striped">
+          	  	<div style="margin-top:30px"></div>
+              	{% for comment in restaurant.comment_list %}
+              	<tr>
+              		<td style="padding:15px;">{{comment}}</td>
+            	</tr>
+            	{% endfor %}
+          	</table>
+        </div>
+    </div>
+    {% if restaurant.comment_list %}
+   	<div id="{{restaurant.id}}-extended-images" class="tab-pane fade">
+    {% else %}
+    <div id="{{restaurant.id}}-extended-images" class="tab-pane fade in active">
+    {% endif %}
+    <div style="margin-top:30px"></div>
+    {% for img in restaurant.image_list %}
+        <div class = "col-md-6">
+        	<img src='{{img}}' style="margin: 0 auto; margin-bottom: 10px; display: block; height: auto; width:auto; max-width:90%;"></img>
+        </div>
+    {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

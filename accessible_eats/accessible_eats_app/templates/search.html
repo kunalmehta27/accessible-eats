@@ -104,5 +104,5 @@ Search
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
 <script src="{% static 'js/typeahead.bundle.min.js' %}"></script>
 <script src="{% static 'js/search.js' %}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnAkO8M2ykT71YBC0WmSfmZtEUhnoCN50&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
 {% endblock %}
