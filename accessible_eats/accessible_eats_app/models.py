@@ -1,8 +1,14 @@
 from django.db import models
 from types import State
 from django.forms import ModelForm, TextInput, Textarea, ValidationError
-import json
+import json, uuid, os
 from collections import Counter
+
+def update_filename(instance, filename):
+    path = ""
+    extension = filename.split('.')[1]
+    new_name = str(uuid.uuid4()) + '.' + extension
+    return os.path.join(path, new_name)
 
 class Constants:
     review_score_values = {'has_accessible_bathroom':3, 'has_parking':2, 'has_space':1, 'has_ramp':2, 'has_entrances':2}
@@ -144,8 +150,8 @@ class Review(models.Model):
     has_ramp = models.BooleanField(blank=True, help_text="4. Is there a ramp, walkway or other device that leads to the restaurant from the parking lot?")
     has_space = models.BooleanField(blank=True, help_text="5. Is there enough space for wheelchairs to navigate and utilize all the tables and the floor of the restaurant?")
     restaurant = models.ForeignKey(Restaurant, related_name="reviews", help_text="Foreign key to restaurant")
-    image1 = models.FileField(upload_to='', blank=True, null=True, help_text="(Optional) Upload image of accessibile features:")
-    image2 = models.FileField(upload_to='', blank=True, null=True, help_text="(Optional) Upload additional image:")
+    image1 = models.FileField(upload_to=update_filename, blank=True, null=True, help_text="(Optional) Upload image of accessibile features:")
+    image2 = models.FileField(upload_to=update_filename, blank=True, null=True, help_text="(Optional) Upload additional image:")
     comments = models.TextField(null=True, blank=True, help_text="Additional optional comments")
 
 
