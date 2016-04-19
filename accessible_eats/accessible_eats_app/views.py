@@ -176,7 +176,9 @@ def detailed(request, restaurant_id):
     restaurant = Restaurant.objects.get(id=restaurant_id)
     return render(request, 'detailed.html', {'restaurant':restaurant})
 
-
+#Please do not edit the function below or attempt to explore the text messaging functionality.
+#We get charged for every text message sent, so we want to minimize unnecessary usage.
+#Please reach out to the development team if you have any suggestions for improvement of this feature.
 @csrf_exempt
 def text(request):
     error_msg = 'Sorry, we had a problem parsing your request. Please try again.'

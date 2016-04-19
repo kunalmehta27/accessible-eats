@@ -3,6 +3,3 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-
-accessible_eats/settings.py
-db.sqlite3

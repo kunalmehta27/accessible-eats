@@ -34,8 +34,8 @@ def process_tweet(tweet):
 
 
 def twitter_cron():
-    auth = tweepy.OAuthHandler('5h2sUFrcVKKHsxcVOn4f8vnNv', 'rmzxDvpjQYKgBvjyKEYofkJzMXa6CzmdIV5MtqGpoWawa7VGi7')
-    auth.set_access_token('703265827575996416-ADhKXzr5E789p5FWcune1wYjUw8xlwy','wSLUxmJrmkhryXOyfJrIEQowYwSFloWhiT9CQR2Q711UI')
+    auth = tweepy.OAuthHandler(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(settings.TWITTER_ACCESS_TOKEN_KEY,settings.TWITTER_ACCESS_TOKEN_SECRET)
     api = tweepy.API(auth)
     c = tweepy.Cursor(api.user_timeline, count = 200).items()
     while True:
