@@ -16,10 +16,8 @@ Accessible Eats uses a number of APIs and Open Source projects to work properly.
 * [jQuery] - self explanatory
 
 # Installation
-First, clone the repository onto your local drive. 
-```sh
-$ git clone
-```
+First, fork the [repository] onto your local drive. 
+
 The best way to develop in Django is by using a virtual environment. We recommend using [virtualenv]. An issue with virtualenv may be that it conflicts with Anaconda, to solve this simply uninstall Anaconda. You can create the necessary virtual environment by running
 ```sh
 $ virtualenv -p python2.7 /tmp/accessible_eats/
@@ -28,7 +26,7 @@ and then activate by running
 ```sh
 $ . /tmp/accessible_eats/bin/activate
 ```
-Once you have activated your virtualenvironment, move to where you have cloned the repository. Then run
+Once you have activated your virtualenvironment, move to where you have forked the repository. Then run
 ```sh
 $ cd accessible_eats
 ```
@@ -75,4 +73,5 @@ MIT
    [Django]: <https://www.djangoproject.com/>
    [Tweepy]: <http://tweepy.readthedocs.org/en/v3.5.0/>
    [Google Maps Geolocation]: <https://console.developers.google.com/apis/>
+   [repository]: <https://github.com/kunalmehta27/accessible-eats>
 
