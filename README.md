@@ -1,5 +1,5 @@
 # Accessible Eats
-Accessible Eats is a Django-based web application that provides accessible restaurant recommendations for disabled Americans. 
+Accessible Eats is a Django-based web application that provides accessible restaurant recommendations. 
 
 # Version
 0.0.1
